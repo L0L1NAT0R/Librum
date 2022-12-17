@@ -30,15 +30,8 @@ router.post('/', async (req, res) => {
   const author = new Author({
     name: req.body.name
   })
-  try {
     const newAuthor = await author.save()
     res.redirect(`authors/${newAuthor.id}`)
-  } catch {
-    res.render('authors/new', {
-      author: author,
-      errorMessage: 'Error creating Author'
-    })
-  }
 })
 
 router.get('/:id', async (req, res) => {
@@ -81,7 +74,7 @@ router.put('/:id', async (req, res) => {
     }
   }
 })
-
+//Deleting book
 router.delete('/:id', async (req, res) => {
   let author
   try {

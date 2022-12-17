@@ -6,18 +6,18 @@ const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 
 // All Books Route
 router.get('/', async (req, res) => {
-  let query = Book.find()
+  let search = Book.find()
   if (req.query.title != null && req.query.title != '') {
-    query = query.regex('title', new RegExp(req.query.title, 'i'))
+    search = search.regex('title', new RegExp(req.query.title, 'i'))
   }
   if (req.query.publishedBefore != null && req.query.publishedBefore != '') {
-    query = query.lte('publishDate', req.query.publishedBefore)
+    search = search.lte('publishDate', req.query.publishedBefore)
   }
   if (req.query.publishedAfter != null && req.query.publishedAfter != '') {
-    query = query.gte('publishDate', req.query.publishedAfter)
+    search = search.gte('publishDate', req.query.publishedAfter)
   }
   try {
-    const books = await query.exec()
+    const books = await search.exec()
     res.render('books/index', {
       books: books,
       searchOptions: req.query
@@ -47,6 +47,7 @@ router.post('/', async (req, res) => {
     const newBook = await book.save()
     res.redirect(`books/${newBook.id}`) 
 })
+
 
 // Show Book Route
 router.get('/:id', async (req, res) => {
@@ -88,6 +89,7 @@ router.delete('/:id', async (req, res) => {
     book = await Book.findById(req.params.id)
     await book.remove()
     res.redirect('/books')
+
 })
 
 async function renderNewPage(res, book, hasError = false) {
@@ -127,4 +129,10 @@ function saveCover(book, coverEncoded) {
   }
 }
 
+
 module.exports = router
+
+
+
+
+

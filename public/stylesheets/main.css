@@ -1,5 +1,4 @@
 @import 'shared/variables.css';
-@import 'shared/fonts.css';
 @import 'shared/header.css';
 @import 'shared/buttons.css';
 @import 'shared/form.css';
@@ -9,15 +8,17 @@
 :root {
   font-family: 'Fantasy';
   font-size: 20px;
-  color:black;
+  color: black;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 body {
-  background:white;
+  background: white;
 }
 
 .container {
@@ -33,4 +34,8 @@ body {
 .page-header {
   font-size: 2rem;
   font-weight: 500;
+}
+
+.a{
+  color: black
 }
