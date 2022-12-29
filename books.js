@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const Book = require('../models/book')
-const Author = require('../models/author')
+const Book = require('./models/book')
+const Author = require('./models/authorSchema')
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 
 // All Books Route
@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
     pageCount: req.body.pageCount,
     description: req.body.description
   })
-  if (req.body.cover == null) return
+  if (req.body.cover == null) return //This is the code used to save the cover
    const cover = JSON.parse(req.body.cover)
   if (imageMimeTypes.includes(cover.type)) {
     book.coverImage = new Buffer.from(cover.data, 'base64')
