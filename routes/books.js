@@ -41,12 +41,26 @@ router.post('/', async (req, res) => {
     pageCount: req.body.pageCount,
     description: req.body.description
   })
-  saveCover(book, req.body.cover)
+  if (req.body.cover == null) return
+   const cover = JSON.parse(req.body.cover)
+  if (imageMimeTypes.includes(cover.type)) {
+    book.coverImage = new Buffer.from(cover.data, 'base64')
+    book.coverImageType = cover.type
+  }
 
 
     const newBook = await book.save()
     res.redirect(`books/${newBook.id}`) 
 })
+
+function saveCover(book, coverEncoded) {
+  if (coverEncoded == null) return
+  const cover = JSON.parse(coverEncoded)
+  if (imageMimeTypes.includes(cover.type)) {
+    book.coverImage = new Buffer.from(cover.data, 'base64')
+    book.coverImageType = cover.type
+  }
+}
 
 
 // Show Book Route

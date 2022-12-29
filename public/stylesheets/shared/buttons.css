@@ -33,3 +33,16 @@
   color: black;
   background-color: grey;
 }
+
+.btn-deletebutton{
+  color:white;
+  background-color: red;
+  border: 1px solid black;
+  border-radius: .59rem;
+  padding: .6rem rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
